@@ -224,3 +224,16 @@ user@Syrex:~/Syrex333/workspace/projects/lab03$ git commit -m"added CMakeLists.t
 [main 33f0c1b] added CMakeLists.txt
  1 file changed, 36 insertions(+)
  create mode 100644 CMakeLists.txt
+
+user@Syrex:~/Syrex333/workspace/projects/lab03$ git push origin main
+Username for 'https://github.com': Syrex333
+Password for 'https://%D0%AB%D0%BDSyrex333@github.com':
+Enumerating objects: 24, done.
+Counting objects: 100% (24/24), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (18/18), done.
+Writing objects: 100% (23/23), 4.39 KiB | 2.20 MiB/s, done.
+Total 23 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), done.
+To https://github.com/Syrex333/lab03.git
+   bebd124..3f66ee7  main -> main
