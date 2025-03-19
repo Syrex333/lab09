@@ -1,5 +1,5 @@
 user@Syrex:~$ export GITHUB_USERNAME=Syrex333
-user@Syrex:~$ export GITHUB_TOKEN=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
+user@Syrex:~$ export GITHUB_TOKEN=1TOKEN
 
 user@Syrex:~$ cd ${GITHUB_USERNAME}/workspace
 user@Syrex:~/Syrex333/workspace$ pushd .
