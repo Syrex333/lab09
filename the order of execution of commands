@@ -1,0 +1,123 @@
+user@Syrex:~$ export GITHUB_USERNAME=Syrex333
+user@Syrex:~$ export GITHUB_TOKEN=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
+
+user@Syrex:~$ cd ${GITHUB_USERNAME}/workspace
+user@Syrex:~/Syrex333/workspace$ pushd .
+~/Syrex333/workspace ~/Syrex333/workspace
+user@Syrex:~/Syrex333/workspace$ source scripts/activate
+
+user@Syrex:~/Syrex333/workspace$ \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+Turning on ignore dotfiles mode.
+Downloading https://github.com/rvm/rvm/archive/master.tar.gz
+Installing RVM to /home/user/.rvm/
+Installation of RVM in /home/user/.rvm/ is almost complete:
+
+  * To start using RVM you need to run `source /home/user/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+Thanks for installing RVM 🙏
+Please consider donating to our open collective to help us maintain RVM.
+
+👉  Donate: https://opencollective.com/rvm/donate
+
+
+user@Syrex:~/Syrex333/workspace$ echo "source $HOME/.rvm/scripts/rvm" >> scripts/activate
+user@Syrex:~/Syrex333/workspace$ . scripts/activate
+user@Syrex:~/Syrex333/workspace$ rvm autolibs disable
+user@Syrex:~/Syrex333/workspace$ rvm install ruby-2.4.2
+Searching for binary rubies, this might take some time.
+Found remote file https://rvm-io.global.ssl.fastly.net/binaries/ubuntu/20.04/x86_64/ruby-2.4.2.tar.bz2
+ruby-2.4.2 - #configure
+ruby-2.4.2 - #download
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 18.7M  100 18.7M    0     0  10.6M      0  0:00:01  0:00:01 --:--:-- 10.6M
+ruby-2.4.2 - #validate archive
+ruby-2.4.2 - #extract
+ruby-2.4.2 - #validate binary
+ruby-2.4.2 - #setup
+ruby-2.4.2 - #gemset created /home/user/.rvm/gems/ruby-2.4.2@global
+ruby-2.4.2 - #importing gemset /home/user/.rvm/gemsets/global.gems..................................
+ruby-2.4.2 - #generating global wrappers........
+ruby-2.4.2 - #gemset created /home/user/.rvm/gems/ruby-2.4.2
+ruby-2.4.2 - #importing gemsetfile /home/user/.rvm/gemsets/default.gems evaluated to empty gem list
+ruby-2.4.2 - #generating default wrappers........
+user@Syrex:~/Syrex333/workspace$ rvm use 2.4.2 --default
+Using /home/user/.rvm/gems/ruby-2.4.2
+user@Syrex:~/Syrex333/workspace$ gem install travis
+
+stop
+Fetching public_suffix-6.0.1.gem
+Fetching rack-3.1.12.gem
+Fetching rack-test-2.1.0.gem
+Fetching addressable-2.8.7.gem
+Fetching json_pure-2.6.3.gem
+Fetching websocket-1.2.11.gem
+Fetching launchy-2.5.2.gem
+Fetching pusher-client-0.6.2.gem
+Fetching highline-2.1.0.gem
+Fetching net-http-pipeline-1.0.1.gem
+Fetching connection_pool-2.5.0.gem
+Fetching net-http-persistent-4.0.5.gem
+Fetching multi_json-1.15.0.gem
+Fetching ffi-1.17.1-x86_64-linux-gnu.gem
+Fetching ethon-0.16.0.gem
+Fetching typhoeus-1.4.1.gem
+Fetching ruby2_keywords-0.0.5.gem
+Fetching faraday-net_http-3.0.2.gem
+Fetching base64-0.2.0.gem
+Fetching faraday-2.7.12.gem
+Fetching faraday-typhoeus-1.1.0.gem
+Fetching faraday-retry-2.2.1.gem
+Fetching concurrent-ruby-1.3.5.gem
+Fetching tzinfo-2.0.6.gem
+Fetching i18n-1.14.7.gem
+Fetching activesupport-7.0.8.7.gem
+Fetching travis-gh-0.21.0.gem
+Fetching faraday-rack-2.0.0.gem
+Fetching travis-1.14.0.gem
+/home/user/.rvm/rubies/ruby-2.4.2/lib/ruby/gems/2.4.0/gems/gem-wrappers-1.4.0/lib/gem-wrappers/installer.rb:56: warning: Insecure world writable dir /mnt/c/WINDOWS/system32 in PATH, mode 040777
+Successfully installed rack-3.1.12
+Successfully installed rack-test-2.1.0
+Successfully installed websocket-1.2.11
+Successfully installed pusher-client-0.6.2
+ERROR:  Error installing travis:
+        The last version of public_suffix (>= 2.0.2, < 7.0) to support your Ruby & RubyGems was 4.0.7. Try installing it with `gem install public_suffix -v 4.0.7` and then running the current command again
+        public_suffix requires Ruby version >= 3.0. The current ruby version is 2.4.2.198.
+
+user@Syrex:~/Syrex333/workspace$ git clone https://github.com/${GITHUB_USERNAME}/lab03 projects/lab04
+Cloning into 'projects/lab04'...
+remote: Enumerating objects: 34, done.
+remote: Counting objects: 100% (34/34), done.
+remote: Compressing objects: 100% (22/22), done.
+remote: Total 34 (delta 6), reused 22 (delta 4), pack-reused 0 (from 0)
+Unpacking objects: 100% (34/34), 10.19 KiB | 149.00 KiB/s, done.
+user@Syrex:~/Syrex333/workspace$ cd projects/lab04
+user@Syrex:~/Syrex333/workspace/projects/lab04$ git remote remove origin
+user@Syrex:~/Syrex333/workspace/projects/lab04$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab04
+
+user@Syrex:~/Syrex333/workspace/projects/lab04$ cat > .travis.yml <<EOF
+> language: cpp
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab04$ cat >> .travis.yml <<EOF
+>
+e -H. -> script:
+d -DCM> - cmake -H. -B_build -DCMAKE_INSTALL_PREFIX=_install
+> - cmake --build _build
+- cmake --build > - cmake --build _build --target install
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab04$ cat >> .travis.yml <<EOF
+>
+urces:
+> addons:
+>   apt:
+george-e>     sources:
+>       - george-edison55-precise-backports
+>     packages:
+>       - cmake
+>       - cmake-data
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab04$ ex -sc '1i|<фрагмент_вставки_значка>' -cx README.md
+
