@@ -121,3 +121,15 @@ george-e>     sources:
 
 user@Syrex:~/Syrex333/workspace/projects/lab04$ ex -sc '1i|<фрагмент_вставки_значка>' -cx README.md
 
+user@Syrex:~/Syrex333/workspace/projects/lab04$ git push --force origin main
+Username for 'https://github.com': Syrex333
+Password for 'https://Syrex333@github.com':
+Enumerating objects: 38, done.
+Counting objects: 100% (38/38), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (29/29), done.
+Writing objects: 100% (38/38), 10.67 KiB | 2.13 MiB/s, done.
+Total 38 (delta 7), reused 0 (delta 0)
+remote: Resolving deltas: 100% (7/7), done.
+To https://github.com/Syrex333/lab04
+ + 5fdde28...b364916 main -> main (forced update)
