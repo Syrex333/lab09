@@ -1,0 +1,178 @@
+user@Syrex:~$ export GITHUB_USERNAME=Syrex333
+user@Syrex:~$ export GITHUB_EMAIL=ivan.chernogorov.02@bk.ru
+user@Syrex:~$ alias edit=nano
+user@Syrex:~$ alias gsed=sed
+
+user@Syrex:~$ cd ${GITHUB_USERNAME}/workspace
+user@Syrex:~/Syrex333/workspace$ pushd .
+~/Syrex333/workspace ~/Syrex333/workspace
+user@Syrex:~/Syrex333/workspace$ source scripts/activate
+
+user@Syrex:~/Syrex333/workspace$ git clone https://github.com/${GITHUB_USERNAME}/lab05 projects/lab06
+Cloning into 'projects/lab06'...
+remote: Enumerating objects: 63, done.
+remote: Counting objects: 100% (63/63), done.
+remote: Compressing objects: 100% (35/35), done.
+remote: Total 63 (delta 18), reused 58 (delta 16), pack-reused 0 (from 0)
+Unpacking objects: 100% (63/63), 21.27 KiB | 463.00 KiB/s, done.
+user@Syrex:~/Syrex333/workspace$ cd projects/lab06
+user@Syrex:~/Syrex333/workspace/projects/lab06$ git remote remove origin
+user@Syrex:~/Syrex333/workspace/projects/lab06$ git remote add origin https://github.com/${GITHUB_USERNAME}/lab06
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_STRING "v\${PRINT_VERSION}")
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION\
+> \${PRINT_VERSION_MAJOR}.\${PRINT_VERSION_MINOR}.\${PRINT_VERSION_PATCH}.\${PRINT_VERSION_TWEAK})
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_TWEAK 0)
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_PATCH 0)
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_MINOR 1)
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i '/project(print)/a\
+> set(PRINT_VERSION_MAJOR 0)
+> ' CMakeLists.txt
+user@Syrex:~/Syrex333/workspace/projects/lab06$ git diff
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index aa7a323..77b1359 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -7,6 +7,13 @@ option(BUILD_EXAMPLES "Build examples" OFF)
+ option(BUILD_TESTS "Build tests" OFF)
+
+ project(print)
++set(PRINT_VERSION_MAJOR 0)
++set(PRINT_VERSION_MINOR 1)
++set(PRINT_VERSION_PATCH 0)
++set(PRINT_VERSION_TWEAK 0)
++set(PRINT_VERSION
++${PRINT_VERSION_MAJOR}.${PRINT_VERSION_MINOR}.${PRINT_VERSION_PATCH}.${PRINT_VERSION_TWEAK})
++set(PRINT_VERSION_STRING "v${PRINT_VERSION}")
+
+ add_library(print STATIC ${CMAKE_CURRENT_SOURCE_DIR}/sources/print.cpp)
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ touch DESCRIPTION && edit DESCRIPTION
+user@Syrex:~/Syrex333/workspace/projects/lab06$ touch ChangeLog.md
+user@Syrex:~/Syrex333/workspace/projects/lab06$ export DATE="`LANG=en_US date +'%a %b %d %Y'`"
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat > ChangeLog.md <<EOF
+> * ${DATE} ${GITHUB_USERNAME} <${GITHUB_EMAIL}> 0.1.0.0
+> - Initial RPM release
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat > CPackConfig.cmake <<EOF
+> include(InstallRequiredSystemLibraries)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_PACKAGE_CONTACT ${GITHUB_EMAIL})
+set(CPA> set(CPACK_PACKAGE_VERSION_MAJOR \${PRINT_VERSION_MAJOR})
+> set(CPACK_PACKAGE_VERSION_MINOR \${PRINT_VERSION_MINOR})
+> set(CPACK_PACKAGE_VERSION_PATCH \${PRINT_VERSION_PATCH})
+set(CPA> set(CPACK_PACKAGE_VERSION_TWEAK \${PRINT_VERSION_TWEAK})
+set(CPA> set(CPACK_PACKAGE_VERSION \${PRINT_VERSION})
+> set(CPACK_PACKAGE_DESCRIPTION_FILE \${CMAKE_CURRENT_SOURCE_DIR}/DESCRIPTION)
+CK_PACK> set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "static C++ library for printing")
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat >> CPackConfig.cmake <<EOF
+> set(CPACK_RESOURCE_FILE_LICENSE \${CMAKE_CURRENT_SOURCE_DIR}/LICENSE)
+> set(CPACK_RESOURCE_FILE_README \${CMAKE_CURRENT_SOURCE_DIR}/README.md)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$  cat >> CPackConfig.cmake <<EOF
+> set(CPACK_RPM_PACKAGE_NAME "print-devel")
+CPAC> set(CPACK_RPM_PACKAGE_LICENSE "MIT")
+PACK> set(CPACK_RPM_PACKAGE_GROUP "print")
+> set(CPACK_RPM_CHANGELOG_FILE \${CMAKE_CURRENT_SOURCE_DIR}/ChangeLog.md)
+> set(CPACK_RPM_PACKAGE_RELEASE 1)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat >> CPackConfig.cmake <<EOF
+>
+IAN_PACK> set(CPACK_DEBIAN_PACKAGE_NAME "libprint-dev")
+CPAC> set(CPACK_DEBIAN_PACKAGE_PREDEPENDS "cmake >= 3.0")
+> set(CPACK_DEBIAN_PACKAGE_RELEASE 1)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat >> CPackConfig.cmake <<EOF
+> include(CPack)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cat >> CMakeLists.txt <<EOF
+>
+.cmake)> include(CPackConfig.cmake)
+> EOF
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ gsed -i 's/lab05/lab06/g' README.md
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ git push origin main --tags
+Username for 'https://github.com': Syrex333
+Password for 'https://Syrex333@github.com':
+Enumerating objects: 68, done.
+Counting objects: 100% (68/68), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (56/56), done.
+Writing objects: 100% (68/68), 22.45 KiB | 3.21 MiB/s, done.
+Total 68 (delta 19), reused 0 (delta 0)
+remote: Resolving deltas: 100% (19/19), done.
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cmake -H. -B_build
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/Syrex333/workspace/projects/lab06/_build
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cmake --build _build
+Scanning dependencies of target print
+[ 50%] Building CXX object CMakeFiles/print.dir/sources/print.cpp.o
+[100%] Linking CXX static library libprint.a
+[100%] Built target print
+user@Syrex:~/Syrex333/workspace/projects/lab06$  cd _build
+user@Syrex:~/Syrex333/workspace/projects/lab06/_build$ cpack -G "TGZ"
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Run preinstall target for: print
+CPack: - Install project: print []
+CPack: Create package
+CPack: - package: /home/user/Syrex333/workspace/projects/lab06/_build/print-0.1.0.0-Linux.tar.gz generated.
+user@Syrex:~/Syrex333/workspace/projects/lab06/_build$ cd ..
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cmake -H. -B_build -DCPACK_GENERATOR="TGZ"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/Syrex333/workspace/projects/lab06/_build
+user@Syrex:~/Syrex333/workspace/projects/lab06$ cmake --build _build --target package
+[100%] Built target print
+Run CPack packaging tool...
+CPack: Create package using TGZ
+CPack: Install projects
+CPack: - Run preinstall target for: print
+CPack: - Install project: print []
+CPack: Create package
+CPack: - package: /home/user/Syrex333/workspace/projects/lab06/_build/print-0.1.0.0-Linux.tar.gz generated.
+
+user@Syrex:~/Syrex333/workspace/projects/lab06$ mkdir artifacts
+user@Syrex:~/Syrex333/workspace/projects/lab06$ mv _build/*.tar.gz artifacts
+user@Syrex:~/Syrex333/workspace/projects/lab06$ tree artifacts
+artifacts
+└── print-0.1.0.0-Linux.tar.gz
+
+0 directories, 1 file
