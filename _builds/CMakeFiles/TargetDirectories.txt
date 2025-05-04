@@ -1,0 +1,12 @@
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/install/strip.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/edit_cache.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/test.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/package_source.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/install.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/list_install_components.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/rebuild_cache.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/package.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/install/local.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/demo.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/check.dir
+/home/user/Syrex333/workspace/projects/lab07/_builds/CMakeFiles/print.dir
